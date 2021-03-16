@@ -99,14 +99,14 @@ plot(linspace(0, (Fs/2), N/2+1), m'),
 title('Mel-spaced filterbank'), xlabel('Frequency (Hz)');
 
 % Compute MFCCs for training data
+figure;
 for i=1:num_data
     [stft{i},~,t_stft{i}] = spectrogram(file_vector_norm_crop{i}, win, nover, N, Fs, axiss,spectrumtype);
     stft_mel{i} = m * (stft{i}.*conj(stft{i})); % matrix multiply STFT^2 with mel filter bank
     MFCC{i} = dct(log10(stft_mel{i})); % cepstrum 
     MFCC{i} = MFCC{i} ./ max(max(abs(MFCC{i}))); % normalize MFCC to be between [-1 1]
     
-    % plot MFCC coefficients for different speakers
-    figure;
+    % plot MFCC coefficients for different speakers   
     subplot(3,ceil(num_data/3),i);
     imagesc(t_stft{i},[1 p],MFCC{i});
     set(gca,'YDir','normal')
