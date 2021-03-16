@@ -24,9 +24,9 @@ for i=1:num_data
 end
 %% TEST 2
 % Time domain plots of training data
-figure(1);
+figure;
 for i=1:num_data
-    subplot(3,4,i);
+    subplot(3,ceil(num_data/3),i);
     plot(t{i},file_vector{i});
     title(strcat(dataType ,' Data s',num2str(i),'.wav'));
     xlabel('Time (s)');
@@ -41,9 +41,9 @@ win = hamming(N, 'periodic');
 %nover = nsec_spct/2;
 nover = round(N*2/3); % frame_overlap = 1-frame_increment
 spectrumtype = 'psd';
-figure(2);
+figure;
 for i=1:num_data
-    subplot(3,4,i);
+    subplot(3,ceil(num_data/3),i);
     spectrogram(file_vector{i}, win, nover, N, Fs, axiss,spectrumtype);
     title(strcat('Raw ', dataType ,' Data s',num2str(i),'.wav'));
 end
@@ -62,9 +62,9 @@ for i=1:num_data
     t_crop{i}=(0:length(file_vector_norm_crop{i})-1)./Fs;
 end
 %% Time domain plots of Normalized and cropped training data
-figure(3);
+figure;
 for i=1:num_data
-    subplot(3,4,i);
+    subplot(3,ceil(num_data/3),i);
     plot(t_crop{i},file_vector_norm_crop{i});
     title(strcat('Normalized and Cropped ', dataType, ' Data s',num2str(i),'.wav'));
     xlabel('Time (s)');
@@ -81,9 +81,9 @@ win = hamming(N, 'periodic');
 nover = round(N*2/3); % frame_overlap = 1-frame_increment
 spectrumtype = 'psd';
 
-figure(4);
+figure;
 for i=1:num_data
-    subplot(3,4,i);
+    subplot(3,ceil(num_data/3),i);
     spectrogram(file_vector_norm_crop{i}, win, nover, N, Fs, axiss,spectrumtype);
     title(strcat('Normalized and Cropped ', dataType, ' Data s',num2str(i),'.wav'));
 end
@@ -94,7 +94,7 @@ end
 
 % mel-freq filter bank
 m = melfb(p, N, Fs);
-figure(5);
+figure;
 plot(linspace(0, (Fs/2), N/2+1), m'),
 title('Mel-spaced filterbank'), xlabel('Frequency (Hz)');
 
@@ -106,8 +106,8 @@ for i=1:num_data
     MFCC{i} = MFCC{i} ./ max(max(abs(MFCC{i}))); % normalize MFCC to be between [-1 1]
     
     % plot MFCC coefficients for different speakers
-    figure(6);
-    subplot(3,4,i);
+    figure;
+    subplot(3,ceil(num_data/3),i);
     imagesc(t_stft{i},[1 p],MFCC{i});
     set(gca,'YDir','normal')
     xlabel('Time (s)');
