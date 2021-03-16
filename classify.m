@@ -12,4 +12,4 @@ for i=1:length(codebook)
         speaker_number = i;
     end
 end
-
+disp(min_dist)
