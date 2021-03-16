@@ -15,7 +15,8 @@ elseif strcmp(dataType,'test')
 end
 
 for i=1:num_data
-    file_name=strcat(folder,'s', num2str(i), '.wav');
+    file_name = strcat(folder, a(i).('name'));
+    %file_name=strcat(folder,'s', num2str(i), '.wav');
     [file, Fs] = audioread(file_name);
     file(~any(file,2),:)=[]; %delete zeroes in sound file
 
