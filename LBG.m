@@ -4,16 +4,24 @@ function [codebook, clusterID, D] = LBG(X, K, distortion_eps)
 % K = number of clusters, must be a power of 2
 % distortion_eps: (D'-D/D)<distortion_eps
 %%
-% Step 1: Initialize single-vector cocebook : centroid of all training vectors
+% Step 1: Initialize single-vector codebook : centroid of all training vectors
 codebook = mean(X,1); %1*N vector
 
 D_prime = 0;
+% Compute D (distortion)
+D = sum((X-codebook(1,:)).^2,'all');       
+D = D./size(X,1);
+D_prime = D;
+clusterID = ones(size(X,1), 1);
+
 while size(codebook,1) < K
     eps = 0.01;
     % Step 2: double size of codebook by splitting
     codebook = [codebook.*(1-eps);codebook.*(1+eps)];
     
     while(1)
+        clusterID = zeros(size(X,1), 1);
+        euc_dist = zeros(size(X, 1), size(codebook,1));
         % step 3: Nearest-Neighbor Search
         for i=1:size(codebook,1)
             euc_dist(:,i) = sum(((X-codebook(i,:)).^2),2);
@@ -21,6 +29,7 @@ while size(codebook,1) < K
         [~,clusterID] = min(euc_dist, [], 2);
 
         %Step 4: Centroid update
+        codebook = zeros(size(codebook,1), size(X, 2));
         for i=1:size(codebook,1)
             codebook(i,:) = mean(X(clusterID==i,:));
         end
@@ -28,11 +37,11 @@ while size(codebook,1) < K
         % Compute D (distortion)
         D=0;
         for i=1:size(codebook,1)
-            D = D + sum((X(clusterID==i)-codebook(i,:)).^2,'all');       
+            D = D + sum((X(clusterID==i,:)-codebook(i,:)).^2,'all');       
         end
         D = D./size(X,1);
         
-        if((D_prime-D)/D < distortion_eps)
+        if(abs(D_prime-D)/D < distortion_eps)
             break
         end
         D_prime = D;
