@@ -24,7 +24,7 @@ for i=1:codebook_size
     end
     D(i) = D(i)./size(cepstrum_test,1);
 end
-min_dist = 0.2; % Set this to the threshold value
+min_dist = 0.12; % Set this to the threshold value
 if(min(D, [], 2) < min_dist)
     [~,speaker_number] = min(D, [], 2);
 else
