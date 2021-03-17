@@ -26,6 +26,6 @@ We first start by pre-processing the speechfiles. Figure B1 shows the time domai
 
 Write a function that reads a sound file and turns it into a sequence of MFCC (acoustic vectors) using the speech processing steps described previously. Helpful matlab functions include: wavread, hamming, fft, dct, and own function melfb_own.m
 
-**TEST2:** In Matlab one can playthe sound file using “sound”.  Record the sampling rateand compute how many milliseconds of speech are contained in a block of 256 samples? Now plot the signal to view it in the time domain.  It should be obvious that the raw data are long and may need to be normalized because of different strengths. 
+**TEST2:** In Matlab one can playthe sound file using “sound”.  Record the sampling rateand compute how many milliseconds of speech are contained in a block of 256 samples? Now plot the signal to view it in the time domain.  It should be obvious that the raw data are long and may need to be normalized because of different strengths.  
 
 Use STFT to generateperiodogram.Locate the region in the plot that contains most of the energy, in time (msec) and frequency (in Hz) of the input speech signal.Try different frame size: for example N = 128, 256 and 512.  In each case, set the frame increment M to be about N/3.  
