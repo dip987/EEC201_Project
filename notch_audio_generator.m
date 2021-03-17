@@ -18,7 +18,7 @@ for k=1:size(notch_ranges, 1)
     for i=1:num_data
         file = file_vector{i};
         new_audio = bandstop(file, notch_ranges(k, :));
-        audiowrite(strcat(new_folder, num2str(file_number), '.wav'), new_audio, Fs);
+        audiowrite(strcat(new_folder, 's', num2str(file_number), '.wav'), new_audio, Fs);
         file_number = file_number + 1;
     end
 end
