@@ -1,8 +1,8 @@
-function [speaker_number,D,clusterID_test] = classify(cepstrum_test,codebook,codebook_size)
+function [speaker_number,D,clusterID_test] = classify(cepstrum_test,codebook,codebook_size,min_dist)
 %Classify -> takes in the generated LBG Codebook and returns which speaker
 %it matches. 
 %Returns -1 if speaker cannot be matched to noone of training speaker database 
-
+% min_dist = threshold to classify speaker as unknown
 
 
 % Nearest Codeword Search for each codebook
@@ -24,7 +24,7 @@ for i=1:codebook_size
     end
     D(i) = D(i)./size(cepstrum_test,1);
 end
-min_dist = 0.12; % Set this to the threshold value
+%min_dist = 0.12; % Set this to the threshold value
 if(min(D, [], 2) < min_dist)
     [~,speaker_number] = min(D, [], 2);
 else
