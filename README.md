@@ -21,7 +21,7 @@ The provided dataset for this project comprised of 11 speechfiles recorded by 11
 We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. 
 
 
-![alt text](https://github.com/dip987/EEC201_Project/tree/main/images/FigB1.jpg?raw=true)
+![plot](https://github.com/dip987/EEC201_Project/tree/main/images/FigB1.jpg?raw=true)
 
 
 Write a function that reads a sound file and turns it into a sequence of MFCC (acoustic vectors) using the speech processing steps described previously. Helpful matlab functions include: wavread, hamming, fft, dct, and own function melfb_own.m
