@@ -59,8 +59,11 @@ Studies have shown that humans perceive the frequency contents of sounds in a no
 
 <p align="center">
   <img src="/images/FigB5.jpg?raw=true" alt="Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients" width=600>
+  
   <em>Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients</em>
 </p>
+
+After applying the Mel-spaced filter bank response to our 
 
 
 ### Notch Filter
