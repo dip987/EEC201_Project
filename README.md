@@ -21,7 +21,8 @@ The provided dataset for this project comprised of 11 speechfiles recorded by 11
 Speech signals are quasi-stationary meaning that when examined with Short-Time Fourier Transform (STFT) with a sufficiently short frame (20.48 msec in this project) their frequency characteristics are mostly stationary. The variation of frequency characteristics over a long duration (>1/5 seconds) would reveal information on different sounds being produced. Although short-time spectral analysis is a good starting point to characterize speech signal it is not sufficient for the speaker recognition task. We compute Mel-Frequency Cepstrum Coefficients (MFCC) from the spectrums in order to parametrically represent speech signal. Since humans are good are recognizing speakers, MFCC's are based on the known variation of the human ear’s critical bandwidths with frequency. We use a Mel-Filter bank with 20 filters spaced linearly at low frequencies and logarithmically at high frequencies to capture the phonetically important characteristics of speech. In the end we have 20 MFCCs which are our features to be used in speaker identification. These steps are summarized in Figure B0 below. The steps described in this section are implemented under the function 'mfcc.m' present in this repo. 
 
 <p align="center">
-  <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor">
+  <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor" width=500>
+  
   <em>Figure B0: Block diagram of the MFCC processor</em>
 </p>
 
