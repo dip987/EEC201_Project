@@ -51,17 +51,17 @@ When we observe the spectrograms of the speechfiles we notice that most of the f
 </p>
 
 <p align="center">
-  <img src="/images/FigB4.jpg?raw=true" alt="Figure B4: Spectrograms of raw speechfiles">
-  <em>Figure B4: Spectrograms of raw speechfiles</em>
+  <img src="/images/FigB4.jpg?raw=true" alt="Figure B4: Spectrograms of Processed speechfiles">
+  <em>Figure B4: Spectrograms of Processed speechfiles</em>
 </p>
 
 #### Mel Spectrum
+Studies have shown that humans perceive the frequency contents of sounds in a non-linear scale. Each tone with an actual frequency f (Hz) have a corresponding subjective pitch in a scale called 'mel' scale. The mel-frequency scale has linear spacing below 1kHz and logarithmic spacing above 1kHz. One can simulate the mel-frequency scale by generating a filter bank spaced uniformly on the mel-scale. We use a total of 20 filters in this project and the plot of used mel-spaced filter bank response is shown in Figure B5. This filter bank response is generated using 'melfb.m'.
 
-***{
-Psychophysical studies have discovered that human perception of the frequency contents of sounds for speech signals does not follow a linear scale. Thus for each tone with an actual frequency, f, measured in Hz, a subjective pitch is measured on a scale called the ‘mel’ scale. The mel-frequency scale is a linear frequency spacing below 1000 Hz and a logarithmic spacing above 1000 Hz.
-One approach to simulating the subjective spectrum is to use a filter bank, spaced uniformly on the mel- scale (see Figure 3), which typically has a triangular bandpass frequency response, and the spacing as well as the bandwidth is determined by a constant mel frequency interval. Typical number of mel spectrum coefficients, K, is chosen as 20. One can view each filter as a spectral histogram bin.
-}***
-
+<p align="center">
+  <img src="/images/FigB5.jpg?raw=true" alt="Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients">
+  <em>Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients</em>
+</p>
 
 
 ### Notch Filter
