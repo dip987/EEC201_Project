@@ -16,7 +16,16 @@ You may run 'VQ.m' to plot speaker's data samples and computed centroids in the 
 
 The provided dataset for this project comprised of 11 speechfiles recorded by 11 distinc speakers saying 'Zero'. Each speachfile is named in format S{x}.wav where {x} is the ID of the speaker (x = 1...11). The speechfiles are located under /Data folder. We aim to train a voice model by creating a VQ codebook in the MFCC vector space for each speaker under 'training_data'. The codebook will contain information on voice characteristic of each (known) speaker. Next, we try identifying the speaker ID of speachfiles located under 'test_data'. In order to have a benchmark, we recorded how accurate humans can identify the speakers and took the average between two human separate performances. We recorded an accuracy of 62.5% as human performance. 
 
-### B. Speech Preprocessing
+### B. Speech Preprocessing and Feature Extraction
+
+Speech signals are quasi-stationary meaning that when examined with Short-Time Fourier Transform (STFT) with a sufficiently short frame (20.48 msec in this project) their frequency characteristics are mostly stationary. The variation of frequency characteristics over a long duration (>1/5 seconds) would reveal information on different sounds being produced. Although short-time spectral analysis is a good starting point to characterize speech signal it is not sufficient for the speaker recognition task. We compute Mel-Frequency Cepstrum Coefficients (MFCC) from the spectrums in order to parametrically represent speech signal. Since humans are good are recognizing speakers, MFCC's are based on the known variation of the human ear’s critical bandwidths with frequency. We use a Mel-Filter bank with 20 filters spaced linearly at low frequencies and logarithmically at high frequencies to capture the phonetically important characteristics of speech. In the end we have 20 MFCCs which are our features to be used in speaker identification. These steps are summarized in Figure B0 below. The steps described in this section are implemented under the function 'mfcc.m' present in this repo. 
+
+<p align="center">
+  <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor">
+  <em>Figure B0: Block diagram of the MFCC processor</em>
+</p>
+
+#### Pre-Processing Continuous speech and Generating Spectrum
 
 We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. One can notice that the speechfiles are long and we need to crop the beginning and end portions of the speach where the speaker is not talking. Also each speaker's voice has a different amplitude and different mean. For example, S9, S10 and S11 have a certain offset and does not have a mean of zero. We should normalize the amplitudes of the time-domain speaker data, by dividing by maximum absolute amplitude, so that our speaker identifier algorithm is robust against variations in volume of the speaker. We also remove the offset before normalizing.
 
@@ -43,6 +52,13 @@ When we observe the spectrograms of the speechfiles we notice that most of the f
   <img src="/images/FigB4.jpg?raw=true" alt="Figure B4: Spectrograms of raw speechfiles">
   <em>Figure B4: Spectrograms of raw speechfiles</em>
 </p>
+
+#### Mel Spectrum
+
+***{
+Psychophysical studies have discovered that human perception of the frequency contents of sounds for speech signals does not follow a linear scale. Thus for each tone with an actual frequency, f, measured in Hz, a subjective pitch is measured on a scale called the ‘mel’ scale. The mel-frequency scale is a linear frequency spacing below 1000 Hz and a logarithmic spacing above 1000 Hz.
+One approach to simulating the subjective spectrum is to use a filter bank, spaced uniformly on the mel- scale (see Figure 3), which typically has a triangular bandpass frequency response, and the spacing as well as the bandwidth is determined by a constant mel frequency interval. Typical number of mel spectrum coefficients, K, is chosen as 20. One can view each filter as a spectral histogram bin.
+}***
 
 
 
