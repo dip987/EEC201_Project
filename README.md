@@ -8,7 +8,7 @@ This project aims to identify speakers by making use of mel-frequency cepstrum, 
 
 ## Run instructions
 
-After downloading the gitHub repo, you may run 'classifying_voices.mlx' to display the accuracies on different datasets (provided and new). This script also plots the time-domain plot and spectrograms of training dataset before and after pre-processing. The MFCC coefficients as well as Mel-frequency filter bank are also plotted. 
+After downloading the gitHub repo, you may run 'classifying_voices.mlx' to display the accuracies on different datasets (provided and new). This script also plots the time-domain plot and spectrums of training dataset before and after pre-processing. The MFCC coefficients (Cepstrum) as well as Mel-frequency filter bank are also plotted. 
 
 You may run 'VQ.m' to plot speaker's data samples and computed centroids in the codebook in a 2D MFCC space. MFCC-2 and MFCC-3 are chosen for these 2D plots. 
 
@@ -18,24 +18,25 @@ The provided dataset for this project comprised of 11 speechfiles recorded by 11
 
 ### B. Speech Preprocessing
 
-We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. 
+We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. One can notice that the speechfiles are long and we need to crop the beginning and end portions of the speach where the speaker is not talking. Also each speaker's voice has a different amplitude and different mean. For example, S9, S10 and S11 have a certain offset and does not have a mean of zero. We should normalize the amplitudes of the time-domain speaker data, by dividing by maximum absolute amplitude, so that our speaker identifier algorithm is robust against variations in volume of the speaker. We also remove the offset before normalizing.
 
 <p align="center">
   <img src="/images/FigB1.jpg?raw=true" alt="Figure B1: Time domain plots of raw speechfiles">
 </p>
 
-Write a function that reads a sound file and turns it into a sequence of MFCC (acoustic vectors) using the speech processing steps described previously. Helpful matlab functions include: wavread, hamming, fft, dct, and own function melfb_own.m
+Let's also take a look into the frequency content over time of unprocessed speechfiles. We use STFT to generate the spectrograms plotted in Figure B2. The speechfiles have a sampling rate of 12.5kHz. A Hamming window size of **256 samples/20.48 msec** is used to generate the spectrograms. The Frame increment between windows is set to 1/3 of frame size. A window size of 256 samples was chosen because typical adult female voice frequency is from 165Hz to 255Hz and typical adult male voice frequency is from 85Hz to 180Hz. Therefore, we can have at least 49 samples (12.5kHz/255Hz) and at most 147 samples (12.5kHz/85Hz) within a period of any voice signal. When choosing the window size for STFT we need to make sure we have at least one or two periods of voice signals within a frame  and 256 samples frame size is a good fit. 
 
-**TEST2:** In Matlab one can playthe sound file using “sound”.  Record the sampling rateand compute how many milliseconds of speech are contained in a block of 256 samples? Now plot the signal to view it in the time domain.  It should be obvious that the raw data are long and may need to be normalized because of different strengths.  
+<p align="center">
+  <img src="/images/FigB1.jpg?raw=true" alt="Figure B2: Spectrograms of raw speechfiles">
+</p>
 
-Use STFT to generateperiodogram.Locate the region in the plot that contains most of the energy, in time (msec) and frequency (in Hz) of the input speech signal.Try different frame size: for example N = 128, 256 and 512.  In each case, set the frame increment M to be about N/3. 
 
 
-## Notch Filter
+### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
 To determine the robustness of our speech recognition system, we chopped-off different frequency intervals from the speech signals and recorded its effect on the system accuracy. We started off by taking even intervals along the entire frequency range. Afterwards, we tried leaving off adult male and female voice ranges as well. 
 
-## Results
+### Results
 When cropping off lower frequencies, (0 - 1250Hz), the system got only a single testing example correct. For the rest of the testing samples, the Euclidean distance from the training centroids were extremely high and subsequently they were detected as an unknown speaker. The results are slightly better when we cropped off a slightly higher range (1250 – 2500 Hz). Although its not as good as the original test set. But using a notch filter with any interval starting off at higher than 2500 Hz gave the same results as using the entire frequency range. 
 Adult female vocal frequencies range from 165Hz to 255Hz. When we cropped off this portion of the audio, the estimation accuracy drastically fell for female speakers in the test set (Speaker 1 – 9). The system was only able to correctly detect two speakers in this case while the rest were detected as unknown. Strangely, when dropping the adult male frequency range (85-180 Hz), we expected the system to not be able to detect any of the male speakers in the test set. Since, this range is disjoint from the adult female vocal frequency range, we also expected the system to have similar accuracy to using the entire frequency range for female speakers. While the later assumption is somewhat true with only an exception in a single case, the first assumption was not true. The detection system was able to correctly guess both the male speakers from the test set.
 
