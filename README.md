@@ -58,7 +58,7 @@ When we observe the spectrograms of the speechfiles we notice that most of the f
 Studies have shown that humans perceive the frequency contents of sounds in a non-linear scale. Each tone with an actual frequency f (Hz) have a corresponding subjective pitch in a scale called 'mel' scale. The mel-frequency scale has linear spacing below 1kHz and logarithmic spacing above 1kHz. One can simulate the mel-frequency scale by generating a filter bank spaced uniformly on the mel-scale. We use a total of 20 filters in this project and the plot of used mel-spaced filter bank response is shown in Figure B5. This filter bank response is generated using 'melfb.m'.
 
 <p align="center">
-  <img src="/images/FigB5.jpg?raw=true" alt="Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients">
+  <img src="/images/FigB5.jpg?raw=true" alt="Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients" width=600>
   <em>Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients</em>
 </p>
 
