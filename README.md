@@ -23,7 +23,7 @@ Speech signals are quasi-stationary meaning that when examined with Short-Time F
 <p align="center">
   <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor" width=600>
   
-  <figurecaption align="center">Figure B0: Block diagram of the MFCC processor</figurecaption>
+  <em>Figure B0: Block diagram of the MFCC processor</em>
 </p>
 
 #### Pre-Processing Continuous speech and Generating Spectrum
