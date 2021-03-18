@@ -32,6 +32,18 @@ Let's also take a look into the frequency content over time of unprocessed speec
   <figcaption>Figure B2: Spectrograms of raw speechfiles</figcaption>
 </p>
 
+When we observe the spectrograms of the speechfiles we notice that most of the frequency content is at lower frequencies and the periodogram has high amplitude in time when the speaker starts speaking. We can remove the silent portions of the audio files by only keeping the data with a normalized amplitude of 0.02 (-34dB) or higher. Figure B3 shows the time-domain plots and figure B4 shows the spectrograms of the processed data. 
+
+<p align="center">
+  <img src="/images/FigB3.jpg?raw=true" alt="Figure B3: Time domain plots of Processed speechfiles">
+  <figcaption>Figure B3: Time domain plots of Processed speechfiles</figcaption>
+</p>
+
+<p align="center">
+  <img src="/images/FigB4.jpg?raw=true" alt="Figure B4: Spectrograms of raw speechfiles">
+  <figcaption>Figure B4: Spectrograms of raw speechfiles</figcaption>
+</p>
+
 
 
 ### Notch Filter
