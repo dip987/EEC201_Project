@@ -21,13 +21,13 @@ The provided dataset for this project comprised of 11 speechfiles recorded by 11
 We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. One can notice that the speechfiles are long and we need to crop the beginning and end portions of the speach where the speaker is not talking. Also each speaker's voice has a different amplitude and different mean. For example, S9, S10 and S11 have a certain offset and does not have a mean of zero. We should normalize the amplitudes of the time-domain speaker data, by dividing by maximum absolute amplitude, so that our speaker identifier algorithm is robust against variations in volume of the speaker. We also remove the offset before normalizing.
 
 <p align="center">
-  <img src="/images/FigB1.jpg?raw=true" alt="Figure B1: Time domain plots of raw speechfiles">
+  <img src="/images/FigB1.jpg?raw=true" alt="Figure B1: Time domain plots of raw speechfiles" title="Figure B1: Time domain plots of raw speechfiles">
 </p>
 
 Let's also take a look into the frequency content over time of unprocessed speechfiles. We use STFT to generate the spectrograms plotted in Figure B2. The speechfiles have a sampling rate of 12.5kHz. A Hamming window size of **256 samples/20.48 msec** is used to generate the spectrograms. The Frame increment between windows is set to 1/3 of frame size. A window size of 256 samples was chosen because typical adult female voice frequency is from 165Hz to 255Hz and typical adult male voice frequency is from 85Hz to 180Hz. Therefore, we can have at least 49 samples (12.5kHz/255Hz) and at most 147 samples (12.5kHz/85Hz) within a period of any voice signal. When choosing the window size for STFT we need to make sure we have at least one or two periods of voice signals within a frame  and 256 samples frame size is a good fit. 
 
 <p align="center">
-  <img src="/images/FigB2.jpg?raw=true" alt="Figure B2: Spectrograms of raw speechfiles">
+  <img src="/images/FigB2.jpg?raw=true" alt="Figure B2: Spectrograms of raw speechfiles" title="Figure B2: Spectrograms of raw speechfiles">
 </p>
 
 
