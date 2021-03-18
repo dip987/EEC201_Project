@@ -22,7 +22,7 @@ Speech signals are quasi-stationary meaning that when examined with Short-Time F
 
 <p align="center">
   <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor" width=600>
-  
+  <br>
   <em>Figure B0: Block diagram of the MFCC processor</em>
 </p>
 
@@ -59,7 +59,7 @@ Studies have shown that humans perceive the frequency contents of sounds in a no
 
 <p align="center">
   <img src="/images/FigB5.jpg?raw=true" alt="Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients" width=600>
-  
+  <br>
   <em>Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients</em>
 </p>
 
