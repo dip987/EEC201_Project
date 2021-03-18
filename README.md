@@ -32,7 +32,6 @@ We first start by pre-processing the speechfiles. Figure B1 shows the time domai
 
 <p align="center">
   <img src="/images/FigB1.jpg?raw=true" alt="Figure B1: Time domain plots of raw speechfiles">
-  
   <em>Figure B1: Time domain plots of raw speechfiles</em>
 </p>
 
