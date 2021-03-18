@@ -21,8 +21,7 @@ The provided dataset for this project comprised of 11 speechfiles recorded by 11
 Speech signals are quasi-stationary meaning that when examined with Short-Time Fourier Transform (STFT) with a sufficiently short frame (20.48 msec in this project) their frequency characteristics are mostly stationary. The variation of frequency characteristics over a long duration (>1/5 seconds) would reveal information on different sounds being produced. Although short-time spectral analysis is a good starting point to characterize speech signal it is not sufficient for the speaker recognition task. We compute Mel-Frequency Cepstrum Coefficients (MFCC) from the spectrums in order to parametrically represent speech signal. Since humans are good are recognizing speakers, MFCC's are based on the known variation of the human ear’s critical bandwidths with frequency. We use a Mel-Filter bank with 20 filters spaced linearly at low frequencies and logarithmically at high frequencies to capture the phonetically important characteristics of speech. In the end we have 20 MFCCs which are our features to be used in speaker identification. These steps are summarized in Figure B0 below. The steps described in this section are implemented under the function 'mfcc.m' present in this repo. 
 
 <p align="center">
-  <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor" width=500>
-  
+  <img src="/images/FigB0.jpg?raw=true" alt="Figure B0: Block diagram of the MFCC processor" width=600>
   <em>Figure B0: Block diagram of the MFCC processor</em>
 </p>
 
@@ -32,7 +31,8 @@ We first start by pre-processing the speechfiles. Figure B1 shows the time domai
 
 <p align="center">
   <img src="/images/FigB1.jpg?raw=true" alt="Figure B1: Time domain plots of raw speechfiles">
-  <em>Figure B1: Time domain plots of raw speechfiles</em>
+  
+  <figurecaption align="center">Figure B1: Time domain plots of raw speechfiles</figurecaption>
 </p>
 
 Let's also take a look into the frequency content over time of unprocessed speechfiles. We use STFT to generate the spectrograms plotted in Figure B2. The speechfiles have a sampling rate of 12.5kHz. A Hamming window size of **256 samples/20.48 msec** is used to generate the spectrograms. The Frame increment between windows is set to 1/3 of frame size. A window size of 256 samples was chosen because typical adult female voice frequency is from 165Hz to 255Hz and typical adult male voice frequency is from 85Hz to 180Hz. Therefore, we can have at least 49 samples (12.5kHz/255Hz) and at most 147 samples (12.5kHz/85Hz) within a period of any voice signal. When choosing the window size for STFT we need to make sure we have at least one or two periods of voice signals within a frame  and 256 samples frame size is a good fit. 
