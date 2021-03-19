@@ -63,8 +63,13 @@ Studies have shown that humans perceive the frequency contents of sounds in a no
   <em>Figure B5: Mel-Spaced Filter Bank Response with 20 coefficients</em>
 </p>
 
-After applying the Mel-spaced filter bank response to our 
+After applying the Mel-spaced filter bank response to our processed speeechfile spectrum, we get the Mel Spectrum shown in Figure B6. We see that mel-spaced filterbank did not alter the frequency content but..
 
+<p align="center">
+  <img src="/images/FigB5.jpg?raw=true" alt="Figure B6: Mel-Spectrum" width=600>
+  <br>
+  <em>Figure B6: Mel-Spectrum</em>
+</p>
 
 ### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
