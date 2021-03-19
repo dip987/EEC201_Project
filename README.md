@@ -107,21 +107,25 @@ Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 ar
 
 ### D. Full Test and Demonstration
 
-Now that our codebooks are ready we are ready to start identifying speakers. As mentioned in the previous section we compute the VQ-distortion between audio files in test data and the codebooks generated from training data. Figiure D0 shows an overview of the classification. The reference is our codebooks. 
+Now that our codebooks are ready we are ready to start identifying speakers. As mentioned in the previous section we compute the VQ-distortion between audio files in test data and the codebooks generated from training data. Figiure D0 shows an overview of the classification. The reference is our codebooks. We use 20 filters in mel-spaced filter bank, 20 MFCC features and 16 clusters to generate our codebooks and obtain the results presented later in this section. There are several tests we performed to test the robustness of our system. The speaker identifier function is under 'classify.m'. We created ground truth table to compute the accuracy of our model. 
 
 <p align="center">
-  <img src="/images/FigD0.jpg?raw=true" alt="Figure D0: Basic structure of speaker identification system">
+  <img src="/images/FigD0.jpg?raw=true" alt="Figure D0: Basic structure of speaker identification system" width=500>
   <br>
   <em>Figure D0: Basic structure of speaker identification system</em>
 </p>
 
+We first start by creating a codebook from the training data when all 11 speakers are present in the training data. Therefore, there are no unknown speakers in the test data. This way our model gave us an accuracy of 100% on training data and 81.82% accuracy on testing data.
+
+We next include only 8 speakers in training data and test on 11 speakers. Therefore, there are 3 unknown speakers in the test data. In order to reject the unknown speakers and classify them as unknown, we set a threshold of 0.15 to VQ-distortion. Meaning that if minimum VQ-distortion is greater than 0.15 we reject the speaker. 2 out of 3 speakers were correctly classified as unknown. We got an accuracy of 71.73% on test data. 
+
+We proceeded to adding new speechfiles to our dataset. We collected speech from three different people and separate recordings for training and testing. We then trained on a total of 14 speechfiles and tested on 14 speechfiles. This was an important step to test our model because the original dataset with 11 audiofiles used the same files for training and testing but now we added 3 audiofiles that have separate training and testing recordings. We achieved an accuracy of 71.43% on this new test data. 
 
 
-### Notch Filter
+#### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
 To determine the robustness of our speech recognition system, we chopped-off different frequency intervals from the speech signals and recorded its effect on the system accuracy. We started off by taking even intervals along the entire frequency range. Afterwards, we tried leaving off adult male and female voice ranges as well. 
 
-### Results
 When cropping off lower frequencies, (0 - 1250Hz), the system got only a single testing example correct. For the rest of the testing samples, the Euclidean distance from the training centroids were extremely high and subsequently they were detected as an unknown speaker. The results are slightly better when we cropped off a slightly higher range (1250 – 2500 Hz). Although its not as good as the original test set. But using a notch filter with any interval starting off at higher than 2500 Hz gave the same results as using the entire frequency range. 
 Adult female vocal frequencies range from 165Hz to 255Hz. When we cropped off this portion of the audio, the estimation accuracy drastically fell for female speakers in the test set (Speaker 1 – 9). The system was only able to correctly detect two speakers in this case while the rest were detected as unknown. Strangely, when dropping the adult male frequency range (85-180 Hz), we expected the system to not be able to detect any of the male speakers in the test set. Since, this range is disjoint from the adult female vocal frequency range, we also expected the system to have similar accuracy to using the entire frequency range for female speakers. While the later assumption is somewhat true with only an exception in a single case, the first assumption was not true. The detection system was able to correctly guess both the male speakers from the test set.
 
