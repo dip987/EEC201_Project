@@ -105,6 +105,18 @@ Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 ar
   <em>Figure C2: MFCC Space and Codewords for 4-clusters</em>
 </p>
 
+### D. Full Test and Demonstration
+
+Now that our codebooks are ready we are ready to start identifying speakers. As mentioned in the previous section we compute the VQ-distortion between audio files in test data and the codebooks generated from training data. Figiure D0 shows an overview of the classification. The reference is our codebooks. 
+
+<p align="center">
+  <img src="/images/FigD0.jpg?raw=true" alt="Figure D0: Basic structure of speaker identification system">
+  <br>
+  <em>Figure D0: Basic structure of speaker identification system</em>
+</p>
+
+
+
 ### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
 To determine the robustness of our speech recognition system, we chopped-off different frequency intervals from the speech signals and recorded its effect on the system accuracy. We started off by taking even intervals along the entire frequency range. Afterwards, we tried leaving off adult male and female voice ranges as well. 
