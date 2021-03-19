@@ -66,7 +66,7 @@ Studies have shown that humans perceive the frequency contents of sounds in a no
 After applying the Mel-spaced filter bank response to our processed speeechfile spectrum, we get the Mel-Spectrum shown in Figure B6. We see that applying mel-spaced filterbank made the low-frequency components stand out more.
 
 <p align="center">
-  <img src="/images/FigB6.jpg?raw=true" alt="Figure B6: Mel-Spectrum" width=600>
+  <img src="/images/FigB6.jpg?raw=true" alt="Figure B6: Mel-Spectrum">
   <br>
   <em>Figure B6: Mel-Spectrum</em>
 </p>
@@ -74,7 +74,7 @@ After applying the Mel-spaced filter bank response to our processed speeechfile 
 Finally, we compute the cepstrum and convert log mel spectrum back to time. We apply discrete-cosine transform (DCT) to log mel spectrum and obtain mel frequency cepstrum coefficients (MFCC). MFCCs are the features of our speaker identification algorithm. We normalized the MFCC to make them in range [-1 1] and avoid sparsity of our features. We plot the normalized MFCC of 11 speechfiles in Figure B7. The 0 coefficient is ignored since it represents the mean of the continuous time audio data and is irrelevant in speaker identification. 
 
 <p align="center">
-  <img src="/images/FigB7.jpg?raw=true" alt="Figure B7: MFCC" width=600>
+  <img src="/images/FigB7.jpg?raw=true" alt="Figure B7: MFCC">
   <br>
   <em>Figure B7: Normalized Mel Frequency Cepstrum Coefficients (MFCC)</em>
 </p>
@@ -82,7 +82,16 @@ Finally, we compute the cepstrum and convert log mel spectrum back to time. We a
 
 ### C. Vector Quantization
 
-In this project we use Vector Quantization (VQ) as the basis of our speaker identifier. VQ maps vectors from a large vector space to a few clusters represented by a codeword. Codeword is the center of a cluster. The collection of all codewords is a codebook. We create a codebook for each speaker using our train data and use it as a reference to identify speakers in the test data. Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 are used for this 2-D space. We show the codewords (centroids) for 4 clusters. We see that in 2-D MFCC space speakers 3 and 10 form separate clusters and this shows that using the codebook as a reference to identify speakers is a promising method. The VQ-distortion is the metric we use to compare the test data to our reference/codebook. Figure C2 shows all 11 speakers in 2D MFCC space with their respective codewords when clustered into 4 clusters. 'VQ.m' can be executed to obtain the plots in figures C1 and C2. 
+In this project we use Vector Quantization (VQ) as the basis of our speaker identifier. VQ maps vectors from a large vector space to a few clusters represented by a codeword. Codeword is the center of a cluster. The collection of all codewords is a codebook. We create a codebook for each speaker using our train data and use it as a reference to identify speakers in the test data. In order to create clusters and find their centroids we use the LBG algorithm following the flow-chart shown in Figure C0. The code is under 'LBG.m'. 
+
+<p align="center">
+  <img src="/images/FigC0.jpg?raw=true" alt="Figure C0: Flow diagram of LBG algorithm" width=600>
+  <br>
+  <em>Figure C0: Flow diagram of LBG algorithm (Adopted from Rabiner and Juang, 1993)</em>
+</p>
+
+
+Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 are used for this 2-D space. We show the codewords (centroids) for 4 clusters. We see that in 2-D MFCC space speakers 3 and 10 form separate clusters and this shows that using the codebook as a reference to identify speakers is a promising method. The VQ-distortion is the metric we use to compare the test data to our reference/codebook. Figure C2 shows all 11 speakers in 2D MFCC space with their respective codewords when clustered into 4 clusters. 'VQ.m' can be executed to obtain the plots in figures C1 and C2. 
 
 <p align="center">
   <img src="/images/FigC1.jpg?raw=true" alt="Figure C1: MFCC Space and Codewords for 4-clusters" width=600>
@@ -91,7 +100,7 @@ In this project we use Vector Quantization (VQ) as the basis of our speaker iden
 </p>
 
 <p align="center">
-  <img src="/images/FigC2.jpg?raw=true" alt="Figure C2: MFCC Space and Codewords for 4-clusters" width=600>
+  <img src="/images/FigC2.jpg?raw=true" alt="Figure C2: MFCC Space and Codewords for 4-clusters">
   <br>
   <em>Figure C2: MFCC Space and Codewords for 4-clusters</em>
 </p>
