@@ -85,7 +85,7 @@ Finally, we compute the cepstrum and convert log mel spectrum back to time. We a
 In this project we use Vector Quantization (VQ) as the basis of our speaker identifier. VQ maps vectors from a large vector space to a few clusters represented by a codeword. Codeword is the center of a cluster. The collection of all codewords is a codebook. We create a codebook for each speaker using our train data and use it as a reference to identify speakers in the test data. In order to create clusters and find their centroids we use the LBG algorithm following the flow-chart shown in Figure C0. The code is under 'LBG.m'. 
 
 <p align="center">
-  <img src="/images/FigC0.jpg?raw=true" alt="Figure C0: Flow diagram of LBG algorithm" width=600>
+  <img src="/images/FigC0.jpg?raw=true" alt="Figure C0: Flow diagram of LBG algorithm" width=400>
   <br>
   <em>Figure C0: Flow diagram of LBG algorithm (Adopted from Rabiner and Juang, 1993)</em>
 </p>
