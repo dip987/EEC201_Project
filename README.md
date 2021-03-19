@@ -71,6 +71,15 @@ After applying the Mel-spaced filter bank response to our processed speeechfile 
   <em>Figure B6: Mel-Spectrum</em>
 </p>
 
+Finally, we compute the cepstrum and convert log mel spectrum back to time. We apply discrete-cosine transform (DCT) to log mel spectrum and obtain mel frequency cepstrum coefficients (MFCC). MFCCs are the features of our speaker identification algorithm. We normalized the MFCC to make them in range [-1 1] and avoid sparsity of our features. We plot the normalized MFCC of 11 speechfiles in Figure B7. The 0 coefficient is ignored since it represents the mean of the continuous time audio data and is irrelevant in speaker identification. 
+
+<p align="center">
+  <img src="/images/FigB7.jpg?raw=true" alt="Figure B7: MFCC" width=600>
+  <br>
+  <em>Figure B7: Normalized Mel Frequency Cepstrum Coefficients (MFCC)</em>
+</p>
+
+
 ### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
 To determine the robustness of our speech recognition system, we chopped-off different frequency intervals from the speech signals and recorded its effect on the system accuracy. We started off by taking even intervals along the entire frequency range. Afterwards, we tried leaving off adult male and female voice ranges as well. 
