@@ -54,7 +54,7 @@ When we observe the spectrograms of the speechfiles we notice that most of the f
   <em>Figure B4: Spectrograms of Processed speechfiles</em>
 </p>
 
-#### Mel Spectrum
+#### Mel Spectrum and Cepstrum
 Studies have shown that humans perceive the frequency contents of sounds in a non-linear scale. Each tone with an actual frequency f (Hz) have a corresponding subjective pitch in a scale called 'mel' scale. The mel-frequency scale has linear spacing below 1kHz and logarithmic spacing above 1kHz. One can simulate the mel-frequency scale by generating a filter bank spaced uniformly on the mel-scale. We use a total of 20 filters in this project and the plot of used mel-spaced filter bank response is shown in Figure B5. This filter bank response is generated using 'melfb.m'.
 
 <p align="center">
@@ -79,6 +79,22 @@ Finally, we compute the cepstrum and convert log mel spectrum back to time. We a
   <em>Figure B7: Normalized Mel Frequency Cepstrum Coefficients (MFCC)</em>
 </p>
 
+
+### C. Vector Quantization
+
+In this project we use Vector Quantization (VQ) as the basis of our speaker identifier. VQ maps vectors from a large vector space to a few clusters represented by a codeword. Codeword is the center of a cluster. The collection of all codewords is a codebook. We create a codebook for each speaker using our train data and use it as a reference to identify speakers in the test data. Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 are used for this 2-D space. We show the codewords (centroids) for 4 clusters. We see that in 2-D MFCC space speakers 3 and 10 form separate clusters and this shows that using the codebook as a reference to identify speakers is a promising method. The VQ-distortion is the metric we use to compare the test data to our reference/codebook. Figure C2 shows all 11 speakers in 2D MFCC space with their respective codewords when clustered into 4 clusters. 'VQ.m' can be executed to obtain the plots in figures C1 and C2. 
+
+<p align="center">
+  <img src="/images/FigC1.jpg?raw=true" alt="Figure C1: MFCC Space and Codewords for 4-clusters" width=600>
+  <br>
+  <em>Figure C1: MFCC Space and Codewords for 4-clusters</em>
+</p>
+
+<p align="center">
+  <img src="/images/FigC2.jpg?raw=true" alt="Figure C2: MFCC Space and Codewords for 4-clusters" width=600>
+  <br>
+  <em>Figure C2: MFCC Space and Codewords for 4-clusters</em>
+</p>
 
 ### Notch Filter
 A notch filter/band-stop filter prevents a specific range of frequencies from passing through. In speech recognition, it can be used to drop a particular frequency range from the speech signal. Usually, human speech consists of frequencies of around 100-300Hz. 
