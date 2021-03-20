@@ -59,7 +59,7 @@ if(verbose==1)
     for i=1:num_data
         subplot(3,ceil(num_data/3),i);
         spectrogram(file_vector{i}, win, nover, N, Fs, axiss,spectrumtype);
-        title(strcat('Raw ', dataType ,' Data s',num2str(i),'.wav'));
+        title(strcat('Raw',' ', dataType ,' Data s',num2str(i),'.wav'));
     end
 end
 %% Normalize raw data to be between [-1,1] and centered around 0 (remove Offset)
@@ -81,7 +81,7 @@ if(verbose==1)
     for i=1:num_data
         subplot(3,ceil(num_data/3),i);
         plot(t_crop{i},file_vector_norm_crop{i});
-        title(strcat('Normalized and Cropped ', dataType, ' Data s',num2str(i),'.wav'));
+        title(strcat('Normalized and Cropped ', ' ', dataType, ' Data s',num2str(i),'.wav'));
         xlabel('Time (s)');
         ylabel('Amplitude');
         ylim([-1.05,1.05]);
@@ -100,7 +100,7 @@ if(verbose==1)
     for i=1:num_data
         subplot(3,ceil(num_data/3),i);
         spectrogram(file_vector_norm_crop{i}, win, nover, N, Fs, axiss,spectrumtype);
-        title(strcat('Normalized and Cropped ', dataType, ' Data s',num2str(i),'.wav'));
+        title(strcat('Normalized and Cropped ',' ', dataType, ' Data s',num2str(i),'.wav'));
     end
 end
 %% TEST 3
@@ -120,20 +120,37 @@ if(verbose==1)
     figure;
 end
 for i=1:num_data
-    [stft{i},~,t_stft{i}] = spectrogram(file_vector_norm_crop{i}, win, nover, N, Fs, axiss,spectrumtype);
+    [stft{i},f_stft,t_stft{i}] = spectrogram(file_vector_norm_crop{i}, win, nover, N, Fs, axiss,spectrumtype);
     stft_mel{i} = m * (stft{i}.*conj(stft{i})); % matrix multiply STFT^2 with mel filter bank
     MFCC{i} = dct(log10(stft_mel{i})); % cepstrum 
     MFCC{i} = MFCC{i} ./ max(max(abs(MFCC{i}))); % normalize MFCC to be between [-1 1]
     if(verbose==1)
         % plot MFCC coefficients for different speakers   
         subplot(3,ceil(num_data/3),i);
-        imagesc(t_stft{i},[1 p],MFCC{i});
+        imagesc(t_stft{i}.*1e-3,[1 p],MFCC{i});
         set(gca,'YDir','normal')
-        xlabel('Time (s)');
+        xlabel('Time (ms)');
         ylabel('MFCC Coefficients');
-        title(strcat('MFCC  ', dataType, ' Data s',num2str(i),'.wav'));
+        title(strcat('MFCC ',' ', dataType, ' Data s',num2str(i),'.wav'));
         colorbar
         caxis([-1 1])
+    end
+end
+
+% Plot Mel Spectrum
+if(verbose==1)
+    figure;
+    for i=1:num_data
+        % plot MFCC coefficients for different speakers   
+        subplot(3,ceil(num_data/3),i);
+        imagesc(t_stft{i}.*1e3,f_stft.*1e3,pow2db(stft_mel{i}));
+        set(gca,'YDir','normal')
+        xlabel('Time (ms)');
+        ylabel('Frequency (kHz)');
+        zlabel('Power (dB)');
+        title(strcat('Mel-Spectrum ',' ', dataType, ' Data s',num2str(i),'.wav'));
+        colorbar
+        %caxis([-1 1])
     end
 end
 
