@@ -12,11 +12,11 @@ After downloading the gitHub repo, you may run 'classifying_voices.mlx' to displ
 
 You may run 'VQ.m' to plot speaker's data samples and computed centroids in the codebook in a 2D MFCC space. MFCC-2 and MFCC-3 are chosen for these 2D plots. 
 
-### A. Speech Data Files
+## A. Speech Data Files
 
 The provided dataset for this project comprised of 11 speechfiles recorded by 11 distinc speakers saying 'Zero'. Each speachfile is named in format S{x}.wav where {x} is the ID of the speaker (x = 1...11). The speechfiles are located under /Data folder. We aim to train a voice model by creating a VQ codebook in the MFCC vector space for each speaker under 'training_data'. The codebook will contain information on voice characteristic of each (known) speaker. Next, we try identifying the speaker ID of speachfiles located under 'test_data'. In order to have a benchmark, we recorded how accurate humans can identify the speakers and took the average between two human separate performances. We recorded an accuracy of 62.5% as human performance. 
 
-### B. Speech Preprocessing and Feature Extraction
+## B. Speech Preprocessing and Feature Extraction
 
 Speech signals are quasi-stationary meaning that when examined with Short-Time Fourier Transform (STFT) with a sufficiently short frame (20.48 msec in this project) their frequency characteristics are mostly stationary. The variation of frequency characteristics over a long duration (>1/5 seconds) would reveal information on different sounds being produced. Although short-time spectral analysis is a good starting point to characterize speech signal it is not sufficient for the speaker recognition task. We compute Mel-Frequency Cepstrum Coefficients (MFCC) from the spectrums in order to parametrically represent speech signal. Since humans are good are recognizing speakers, MFCC's are based on the known variation of the human ear’s critical bandwidths with frequency. We use a Mel-Filter bank with 20 filters spaced linearly at low frequencies and logarithmically at high frequencies to capture the phonetically important characteristics of speech. In the end we have 20 MFCCs which are our features to be used in speaker identification. These steps are summarized in Figure B0 below. The steps described in this section are implemented under the function 'mfcc.m' present in this repo. 
 
@@ -26,7 +26,7 @@ Speech signals are quasi-stationary meaning that when examined with Short-Time F
   <em>Figure B0: Block diagram of the MFCC processor</em>
 </p>
 
-#### Pre-Processing Continuous speech and Generating Spectrum
+### Pre-Processing Continuous speech and Generating Spectrum
 
 We first start by pre-processing the speechfiles. Figure B1 shows the time domain plot of unprocessed 11 speechfiles. One can notice that the speechfiles are long and we need to crop the beginning and end portions of the speach where the speaker is not talking. Also each speaker's voice has a different amplitude and different mean. For example, S9, S10 and S11 have a certain offset and does not have a mean of zero. We should normalize the amplitudes of the time-domain speaker data, by dividing by maximum absolute amplitude, so that our speaker identifier algorithm is robust against variations in volume of the speaker. We also remove the offset before normalizing.
 
@@ -54,7 +54,7 @@ When we observe the spectrograms of the speechfiles we notice that most of the f
   <em>Figure B4: Spectrograms of Processed speechfiles</em>
 </p>
 
-#### Mel Spectrum and Cepstrum
+### Mel Spectrum and Cepstrum
 Studies have shown that humans perceive the frequency contents of sounds in a non-linear scale. Each tone with an actual frequency f (Hz) have a corresponding subjective pitch in a scale called 'mel' scale. The mel-frequency scale has linear spacing below 1kHz and logarithmic spacing above 1kHz. One can simulate the mel-frequency scale by generating a filter bank spaced uniformly on the mel-scale. We use a total of 20 filters in this project and the plot of used mel-spaced filter bank response is shown in Figure B5. This filter bank response is generated using 'melfb.m'.
 
 <p align="center">
@@ -80,7 +80,7 @@ Finally, we compute the cepstrum and convert log mel spectrum back to time. We a
 </p>
 
 
-### C. Vector Quantization
+## C. Vector Quantization
 
 In this project we use Vector Quantization (VQ) as the basis of our speaker identifier. VQ maps vectors from a large vector space to a few clusters represented by a codeword. Codeword is the center of a cluster. The collection of all codewords is a codebook. We create a codebook for each speaker using our train data and use it as a reference to identify speakers in the test data. In order to create clusters and find their centroids we use the LBG algorithm following the flow-chart shown in Figure C0. The code is under 'LBG.m'. 
 
@@ -105,7 +105,7 @@ Figure C1 shows the 2-D vector MFCC space for speakers 3 and 10. MFCC 2 and 3 ar
   <em>Figure C2: MFCC Space and Codewords for 4-clusters</em>
 </p>
 
-### D. Full Test and Demonstration
+## D. Full Test and Demonstration
 
 Now that our codebooks are ready we are ready to start identifying speakers. As mentioned in the previous section we compute the VQ-distortion between audio files in test data and the codebooks generated from training data. Figiure D0 shows an overview of the classification. The reference is our codebooks. We use 20 filters in mel-spaced filter bank, 20 MFCC features and 16 clusters to generate our codebooks and obtain the results presented later in this section. There are several tests we performed to test the robustness of our system. The speaker identifier function is under 'classify.m'. We created ground truth table to compute the accuracy of our model. 
 
