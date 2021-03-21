@@ -134,5 +134,14 @@ Adult female vocal frequencies range from 165Hz to 255Hz. When we cropped off th
 
 ## Online Dataset
 
-The Dataset used can be found at https://github.com/Jakobovski/free-spoken-digit-dataset
+The Dataset used for training can be found at https://github.com/Jakobovski/free-spoken-digit-dataset
+This dataset contains 50 voice samples of different speakers
 
+### A. Training & Testing
+
+We trained two seperate systems using the online dataset. First we tried training with only the online dataset by separating a single sample from each speaker and setting that as the training sample and keeping the rest of them for testing. Afterwards, we merged the training samples provided in Canvas with these online training samples while still keeping the testing sample the same.
+
+### B. Results
+
+Using only the online training dataset, our training accuracy was 100% and testing accuracy on 49 x 6 = 294 samples was 75.17%
+Using a combined training dataset, the training accuracy still remained at a 100% but for this case the testing accuracy dropped significantly to 39.46%. Further looking into the speaker predictions, we can see that even though the testing dataset is composed of only speakers found online, the system mistook some of these speakers as being from the canvas dataset. 
