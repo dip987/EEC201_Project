@@ -147,7 +147,8 @@ We trained two seperate systems using the online dataset. First we tried trainin
 Using only the online training dataset, our training accuracy was 100% and testing accuracy on 49 x 6 = 294 samples was 75.17%
 Using a combined training dataset, the training accuracy still remained at a 100% but for this case the testing accuracy dropped significantly to 39.46. 
 The confusion matrix for this case is given below where each row corresponds to the ground truth and the each column corresponds to the estimate. Speakers 1 - 6 come from the online data set while speakers 7 - 17 come from the canvas dataset. 
-![image](https://user-images.githubusercontent.com/45767121/111893887-66210480-89c3-11eb-94d2-7abdbb8a87c4.png)
+![image](https://user-images.githubusercontent.com/45767121/111893900-8781f080-89c3-11eb-8fa8-27038386b855.png)
+
 
 
 
