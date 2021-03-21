@@ -115,9 +115,10 @@ Now that our codebooks are ready we are ready to start identifying speakers. As 
   <em>Figure D0: Basic structure of speaker identification system</em>
 </p>
 
-We first start by creating a codebook from the training data when **all 11 speakers are present in the training data**. Therefore, there are no unknown speakers in the test data. This way our model gave us an accuracy of **100% on training data and 81.82% accuracy on testing data**.
+We first start by creating a codebook from the training data when **all 11 speakers are present in the training data**. Therefore, there are no unknown speakers in the test data. This way our model gave us an accuracy of **100% on training data and 81.82% accuracy on testing data**. The human performance accuracy is recorded as 62.5% (average between two human performances) on 11 speechfiles. Therefore, our model performs better than human benchmark.
 
 We next include only **8 speakers in training data and test on 11 speakers**. Therefore, there are 3 unknown speakers in the test data. In order to reject the unknown speakers and classify them as unknown, we set a **threshold of 0.15 to VQ-distortion**. Meaning that if minimum VQ-distortion is greater than 0.15 we reject the speaker. 2 out of 3 speakers were correctly classified as unknown. We got an accuracy of **71.73% on test data**. 
+
 
 We proceeded to **adding new speechfiles to our dataset**. We collected speech from three different people and separate recordings for training and testing. We then trained on a total of 14 speechfiles and tested on 14 speechfiles. This was an important step to test our model because the original dataset with 11 audiofiles used the same files for training and testing but now we added 3 audiofiles that have separate training and testing recordings. We achieved an accuracy of **71.43% on this new test data**. 
 
