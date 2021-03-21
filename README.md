@@ -135,7 +135,7 @@ Adult female vocal frequencies range from 165Hz to 255Hz. When we cropped off th
 <p align="center">
   <img src="/images/FigD1.jpg?raw=true" alt="Figure D1: Results with Different Notch Filters">
   <br>
-  <em>Figure D1: Results with Different Notch Filters"</em>
+  <em>Figure D1: Results with Different Notch Filters</em>
 </p>
 
 ## Online Dataset
